@@ -6,16 +6,13 @@ function getNumbers() {
   return [1, 2, 3, 4];
 }
 
-class NumberBaseball extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      answer: getNumbers(),
-      value: "",
-      result: "",
-      tries: [],
-    };
-  }
+class NumberBaseball extends React.PureComponent {
+  state = {
+    answer: getNumbers(),
+    value: "",
+    result: "",
+    tries: [],
+  };
 
   onSubmit = (e) => {
     e.preventDefault();
@@ -24,16 +21,14 @@ class NumberBaseball extends React.Component {
     } else {
       this.setState({ result: "실패", tries: [...this.state.tries, this.state.value + ":실패"], value: "" });
     }
-    this.input.focus();
+    this.inputRef.current.focus();
   };
   onChange = (e) => {
     this.setState({ value: e.target.value });
   };
 
-  input = undefined;
-  ref_input = (c) => {
-    this.input = c;
-  };
+  inputRef = React.createRef();
+  //ref_input = (c) => { this.input = c;};
 
   render() {
     const { result, value, tries } = this.state;
@@ -41,7 +36,7 @@ class NumberBaseball extends React.Component {
       <>
         <h2>{result}</h2>
         <form onSubmit={this.onSubmit}>
-          <input maxLength={4} value={value} onChange={this.onChange} ref={this.ref_input} />
+          <input maxLength={4} value={value} onChange={this.onChange} ref={this.inputRef} />
           <button type="submit">확인</button>
         </form>
         <div>Tries: {tries.length}</div>
@@ -55,10 +50,7 @@ class NumberBaseball extends React.Component {
   }
 }
 
-class Try extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+class Try extends React.PureComponent {
   render() {
     return (
       <li>

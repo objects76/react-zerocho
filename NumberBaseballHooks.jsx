@@ -8,7 +8,6 @@ function getNumbers() {
 
 const NumberBaseballHooks = () => {
   const [answer] = React.useState(getNumbers());
-
   const [value, setValue] = React.useState("");
   const [result, setResult] = React.useState("");
   const [tries, setTries] = React.useState([]);
@@ -48,10 +47,15 @@ const NumberBaseballHooks = () => {
 };
 
 const Try = (props) => {
+  // props->state
+  const [info, setInfo] = React.useState(props.info);
+  const onClick = () => {
+    setInfo("new info");
+  };
   return (
     <li>
       <div>{props.idx}</div>
-      <div>{props.info}</div>
+      <div onClick={onClick}>{info}</div>
     </li>
   );
 };

@@ -5,7 +5,8 @@ const ReactDom = require("react-dom");
 //const WordRelay = require("./WordRelay");
 //const Hot = hot(WordRelay);
 
+const NumberBaseball = require("./NumberBaseball");
 const NumberBaseballHooks = require("./NumberBaseballHooks");
 const RenderTest = require("./RenderTest");
 // jsx syntax: needs babel.
-ReactDom.render(<RenderTest />, document.querySelector("#root"));
+ReactDom.render(<NumberBaseball />, document.querySelector("#root"));
