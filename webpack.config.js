@@ -28,6 +28,7 @@ module.exports = {
                 ],
                 plugins: [
                     '@babel/plugin-proposal-class-properties',
+                    'react-hot-loader/babel',
                 ]
             }
         }],
@@ -36,7 +37,8 @@ module.exports = {
         new webpack.LoaderOptionsPlugin({ debug: true }),
     ], // addtional doing...
     output: { // output js.
-        //path: path.join(__dirname, 'dist'), default output folder is dist.
-        filename: 'app.js'
+        filename: 'app.js',
+        path: path.resolve(__dirname, 'dist'), // default output folder is dist.
+        publicPath: '/dist/'
     },
 };
