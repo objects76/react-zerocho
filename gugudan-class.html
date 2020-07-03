@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>구구단</title>
+  </head>
+  <body>
+    <div id="root"><!-- <button>Like</button> --></div>
+
+    <script type="text/babel">
+      class GuGuDan extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            first: Math.ceil(Math.random() * 9),
+            second: Math.ceil(Math.random() * 9),
+            answer: "",
+            result: "",
+          };
+        }
+
+        // refs...
+        input = undefined;
+        onRefInput = (c) => (this.input = c);
+        onSubmit = (e) => {
+          e.preventDefault();
+          if (parseInt(this.state.answer) === this.state.first * this.state.second) {
+            this.setState((oldState) => {
+              return {
+                result: "정답: " + oldState.answer,
+                first: Math.ceil(Math.random() * 9),
+                second: Math.ceil(Math.random() * 9),
+                answer: "",
+              };
+            });
+          } else {
+            this.setState({
+              result: "땡",
+              answer: "",
+            });
+          }
+          this.input.focus();
+        };
+
+        onChange = (e) => {
+          this.setState({ answer: e.target.value });
+        };
+        render() {
+          console.log("render....");
+          // <!--onclick, onchange, onsubmit, onload, oninput, onfocus, onblur -->
+          return (
+            <>
+              <div>
+                {this.state.first} 곱하기 {this.state.second} = ?
+                <form onSubmit={this.onSubmit}>
+                  <input type="number" value={this.state.answer} onChange={this.onChange} ref={this.onRefInput} />
+
+                  <button type="submit" className="inreact" htmlFor>
+                    입력!
+                  </button>
+                </form>
+                <div>{this.state.result}</div>
+              </div>
+            </>
+          );
+        }
+      }
+
+      ReactDOM.render(<GuGuDan />, document.querySelector("#root"));
+    </script>
+  </body>
+</html>
