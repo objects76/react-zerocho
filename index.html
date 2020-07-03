@@ -7,48 +7,76 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>구구단</title>
   </head>
   <body>
     <div id="root"><!-- <button>Like</button> --></div>
-    <div id="legacy"><button style="background: red;">Like</button></div>
 
     <script type="text/babel">
-      const e = React.createElement;
-      class LikeButton extends React.Component {
+      class GuGuDan extends React.Component {
         constructor(props) {
           super(props);
           this.state = {
-            liked: false,
+            first: Math.ceil(Math.random() * 9),
+            second: Math.ceil(Math.random() * 9),
+            answer: "",
+            result: "",
           };
         }
+
+        onSubmit = (e) => {
+          e.preventDefault();
+          if (
+            parseInt(this.state.answer) ===
+            this.state.first * this.state.second
+          ) {
+            this.setState({
+              result: "정답",
+              first: Math.ceil(Math.random() * 9),
+              second: Math.ceil(Math.random() * 9),
+              answer: "",
+            });
+          } else {
+            this.setState({
+              result: "땡",
+              answer: "",
+            });
+          }
+        };
+
+        onChange = (e) => {
+          this.setState({ answer: e.target.value });
+        };
         render() {
-          //   return e(
-          //     "button",
-          //     {
-          //       onClick: () => {
-          //         console.log("clicked");
-          //         this.setState({ liked: !this.state.liked });
-          //       },
-          //       type: "submit",
-          //     },
-          //     this.state.liked ? "Liked" : "Like"
-          //   ); // <button>Like</button>
+          // <!--onclick, onchange, onsubmit, onload, oninput, onfocus, onblur -->
           return (
-            // JSX : js + xml with babel.
-            <button
-              type="submit"
-              onClick={() => this.setState({ liked: !this.state.liked })}
-            >
-              {this.state.liked ? "Liked" : "Like"}
-            </button>
+            <div>
+              <div>
+                {this.state.first} 곱하기 {this.state.second} = ?
+                <form onSubmit={this.onSubmit}>
+                  <input
+                    type="number"
+                    value={this.state.answer}
+                    onChange={this.onChange}
+                  />
+
+                  <button>입력!</button>
+                </form>
+                <div>{this.state.result}</div>
+              </div>
+            </div>
           );
         }
       }
-    </script>
-    <script type="text/babel">
-      //ReactDOM.render(e(LikeButton), document.querySelector("#root"));
-      ReactDOM.render(<LikeButton />, document.querySelector("#root"));
+
+      ReactDOM.render(
+        <div>
+          <GuGuDan />
+          <GuGuDan />
+          <GuGuDan />
+        </div>,
+        document.querySelector("#root")
+      );
     </script>
   </body>
 </html>
