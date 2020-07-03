@@ -24,6 +24,9 @@
           };
         }
 
+        // refs...
+        input = undefined;
+        onRefInput = (c) => (this.input = c);
         onSubmit = (e) => {
           e.preventDefault();
           if (
@@ -44,12 +47,14 @@
               answer: "",
             });
           }
+          this.input.focus();
         };
 
         onChange = (e) => {
           this.setState({ answer: e.target.value });
         };
         render() {
+          console.log("render....");
           // <!--onclick, onchange, onsubmit, onload, oninput, onfocus, onblur -->
           return (
             <>
@@ -60,6 +65,7 @@
                     type="number"
                     value={this.state.answer}
                     onChange={this.onChange}
+                    ref={this.onRefInput}
                   />
 
                   <button type="submit">입력!</button>
