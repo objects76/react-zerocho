@@ -3,6 +3,8 @@
   <head>
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
@@ -11,7 +13,7 @@
     <div id="root"><!-- <button>Like</button> --></div>
     <div id="legacy"><button style="background: red;">Like</button></div>
 
-    <script>
+    <script type="text/babel">
       const e = React.createElement;
       class LikeButton extends React.Component {
         constructor(props) {
@@ -21,22 +23,32 @@
           };
         }
         render() {
-          return e(
-            "button",
-            {
-              onClick: () => {
-                console.log("clicked");
-                this.setState({ liked: !this.state.liked });
-              },
-              type: "submit",
-            },
-            this.state.liked ? "Liked" : "Like"
-          ); // <button>Like</button>
+          //   return e(
+          //     "button",
+          //     {
+          //       onClick: () => {
+          //         console.log("clicked");
+          //         this.setState({ liked: !this.state.liked });
+          //       },
+          //       type: "submit",
+          //     },
+          //     this.state.liked ? "Liked" : "Like"
+          //   ); // <button>Like</button>
+          return (
+            // JSX : js + xml with babel.
+            <button
+              type="submit"
+              onClick={() => this.setState({ liked: !this.state.liked })}
+            >
+              {this.state.liked ? "Liked" : "Like"}
+            </button>
+          );
         }
       }
     </script>
-    <script>
-      ReactDOM.render(e(LikeButton), document.querySelector("#root"));
+    <script type="text/babel">
+      //ReactDOM.render(e(LikeButton), document.querySelector("#root"));
+      ReactDOM.render(<LikeButton />, document.querySelector("#root"));
     </script>
   </body>
 </html>
