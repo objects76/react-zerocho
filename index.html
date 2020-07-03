@@ -50,7 +50,7 @@
         render() {
           // <!--onclick, onchange, onsubmit, onload, oninput, onfocus, onblur -->
           return (
-            <div>
+            <>
               <div>
                 {this.state.first} 곱하기 {this.state.second} = ?
                 <form onSubmit={this.onSubmit}>
@@ -60,23 +60,16 @@
                     onChange={this.onChange}
                   />
 
-                  <button>입력!</button>
+                  <button type="submit">입력!</button>
                 </form>
                 <div>{this.state.result}</div>
               </div>
-            </div>
+            </>
           );
         }
       }
 
-      ReactDOM.render(
-        <div>
-          <GuGuDan />
-          <GuGuDan />
-          <GuGuDan />
-        </div>,
-        document.querySelector("#root")
-      );
+      ReactDOM.render(<GuGuDan />, document.querySelector("#root"));
     </script>
   </body>
 </html>
