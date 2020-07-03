@@ -1,57 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>구구단</title>
+    <title>끝말 잇기</title>
   </head>
   <body>
-    <div id="root"><!-- <button>Like</button> --></div>
+    <div id="root"></div>
 
-    <script type="text/babel">
-      const GuGuDan = () => {
-        const [first, setFirst] = React.useState(Math.ceil(Math.random() * 9));
-        const [second, setSecond] = React.useState(Math.ceil(Math.random() * 9));
-        const [answer, setAnswer] = React.useState("");
-        const [result, setResult] = React.useState("");
-        const input = React.useRef(null);
-
-        const on_submit = (e) => {
-          e.preventDefault();
-          if (parseInt(answer) === first * second) {
-            setResult("정답: " + answer);
-            //setResult((oldAnswer) => { return "정답: " + oldAnswer;});
-            setFirst(Math.ceil(Math.random() * 9));
-            setSecond(Math.ceil(Math.random() * 9));
-            setAnswer("");
-          } else {
-            setResult("땡");
-            setAnswer("");
-          }
-          input.current.focus();
-        };
-
-        const on_change = (e) => {
-          setAnswer(e.target.value);
-        };
-
-        return (
-          <>
-            {first} 곱하기 {second} = ?
-            <form onSubmit={on_submit}>
-              <input type="number" value={answer} onChange={on_change} ref={input} />
-              <button type="submit">입력!</button>
-            </form>
-            <div>{result}</div>
-          </>
-        );
-      };
-
-      ReactDOM.render(<GuGuDan />, document.querySelector("#root"));
-    </script>
+    <script src="./dist/app.js"></script>
   </body>
 </html>
