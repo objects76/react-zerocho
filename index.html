@@ -30,11 +30,13 @@
             parseInt(this.state.answer) ===
             this.state.first * this.state.second
           ) {
-            this.setState({
-              result: "정답",
-              first: Math.ceil(Math.random() * 9),
-              second: Math.ceil(Math.random() * 9),
-              answer: "",
+            this.setState((oldState) => {
+              return {
+                result: "정답: " + oldState.answer,
+                first: Math.ceil(Math.random() * 9),
+                second: Math.ceil(Math.random() * 9),
+                answer: "",
+              };
             });
           } else {
             this.setState({
