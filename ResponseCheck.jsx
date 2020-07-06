@@ -47,12 +47,19 @@ class ResponseCheck extends Component {
   };
   renderAverage = (result) => {
     if (result.length) {
-      return <div>평균시간: {result.reduce((a, b) => a + b) / result.length}ms</div>;
+      return (
+        <>
+          <div>평균시간: {result.reduce((a, b) => a + b) / result.length}ms</div>
+          <button onClick={this.onReset}>Reset</button>
+        </>
+      );
     }
     return null;
     return result.length ? <div>평균시간: {result.reduce((a, b) => a + b) / result.length}ms</div> : null;
   };
-
+  onReset = () => {
+    this.setState({ result: [] });
+  };
   render() {
     const { state, message, result } = this.state;
     return (
