@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDom from "react-dom";
+const { hot } = require("react-hot-loader/root");
 
 //import { hot } from "react-hot-loader/root";
 //import WordRelay from "./WordRelay";
@@ -8,7 +9,9 @@ import ReactDom from "react-dom";
 //import  NumberBaseball from "./NumberBaseball";
 //import  NumberBaseballHooks from "./NumberBaseballHooks";
 //import  RenderTest from "./RenderTest";
-import ResponseCheckHooks from "./ResponseCheckHooks";
+import TestComponent from "./LottoExtractHooks";
+
+const Hot = hot(TestComponent);
 
 // jsx syntax: needs babel.
-ReactDom.render(<ResponseCheckHooks />, document.querySelector("#root"));
+ReactDom.render(<Hot />, document.querySelector("#root"));
